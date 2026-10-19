@@ -1,0 +1,11 @@
+[project]
+name = "pisa-ukraine-wealth-vs-school"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "inflate64>=1.0.4",
+    "numpy>=2.5.4",
+    "pandas>=3.0.6",
+    "pyreadstat>=1.3.6",
+    "requests>=2.34.2",
+]

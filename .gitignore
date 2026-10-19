@@ -1,0 +1,13 @@
+# Raw OECD files (~1.2 GB zipped, several GB unzipped) - recreate with scripts/download_pisa.py
+data/raw/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Reference papers (not ours to publish)
+*.docx
+
+# Extracted Ukrainian subset (CSV) - recreate with scripts/download_pisa.py
+data/processed/

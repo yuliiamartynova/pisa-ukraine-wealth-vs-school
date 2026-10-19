@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Family or School? PISA 2025 Ukraine</title>
+<meta name="description" content="How much of Ukrainian students' PISA 2025 achievement is associated with their family background, and how much with the school they attend. An interactive analysis of social segregation between schools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">PISA 2025 · Ukraine · Educational inequality</p>
+    <h1>Family or school? How the social make-up of schools shapes Ukrainian students' achievement</h1>
+    <p class="dek">Students from better-off families score higher in PISA. But in Ukraine, the school a student attends, and above all who else studies there, matters more than their own family background.</p>
+    <p class="byline">Data: OECD PISA 2025, <span data-k="nStudents">7,105</span> fifteen-year-olds in <span data-k="nSchools">294</span> schools across 17 of Ukraine's 27 regions · <a href="#methods">Methods</a> · <a href="https://github.com/yuliiamartynova/pisa-ukraine-wealth-vs-school">Code and data</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="findings" aria-label="Key findings">
+    <div class="finding">
+      <p class="num" data-k="kfBetween">–</p>
+      <p class="txt">of the variation in <span data-k="subjLower">mathematics</span> scores lies <b>between schools</b>, compared with <span data-k="escsBetween">–</span> of the variation in family status.</p>
+    </div>
+    <div class="finding">
+      <p class="num"><span data-k="kfComp">–</span><small> vs </small><span data-k="kfOwn">–</span></p>
+      <p class="txt">points per standard deviation: <b>school composition</b> compared with the student's <b>own family status</b>, when both are in one model.</p>
+    </div>
+    <div class="finding">
+      <p class="num"><span data-k="kfGapRaw">–</span><small> → </small><span data-k="kfGapComp">–</span></p>
+      <p class="txt">points: the gap between <b>large-city and village</b> schools before and after accounting for school composition.</p>
+    </div>
+  </div>
+</div>
+
+<nav class="toolbar" aria-label="Subject">
+  <div class="wrap">
+    <span class="toolbar-label">Subject</span>
+    <div class="seg" id="subject">
+      <button type="button" data-v="math" aria-pressed="true">Mathematics</button>
+      <button type="button" data-v="reading" aria-pressed="false">Reading</button>
+      <button type="button" data-v="science" aria-pressed="false">Science</button>
+    </div>
+    <span class="toolbar-note">All figures update for the selected subject</span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- 1 -->
+  <section class="chapter" id="segregation">
+    <p class="chapter-num">1 · Segregation</p>
+    <h2>Schools differ more in results than in whom they enrol</h2>
+    <div class="body measure">
+      <p>If students were spread across schools at random, almost none of the variation in family status or achievement would lie <i>between</i> schools. In Ukraine, <b data-k="escsBetween">–</b> of the variation in students' socio-economic status (ESCS) is between schools. Achievement is even more concentrated: <b data-k="scoreBetween">–</b> of the variation in <span data-k="subjLower">mathematics</span> scores lies between schools.</p>
+      <p>Knowing which school a student attends tells us a great deal about their likely score. The question is how much of this reflects the students a school enrols, and how much reflects the school itself.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-head">
+        <p class="fig-label">Figure 1</p>
+        <p class="fig-title">Achievement is more concentrated between schools than family background</p>
+        <p class="fig-sub">Share of total variance lying between schools and within schools</p>
+      </div>
+      <div class="chart" id="fig1"></div>
+      <ul class="legend">
+        <li><span class="sw" style="background:var(--accent)"></span>Between schools</li>
+        <li><span class="sw" style="background:var(--mark)"></span>Within schools</li>
+      </ul>
+      <figcaption>Between-school share = R² of school fixed effects. ESCS: PISA index of economic, social and cultural status. Standard errors are shown in the table below.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 2 -->
+  <section class="chapter" id="composition">
+    <p class="chapter-num">2 · Family and school</p>
+    <h2>School composition outweighs a student's own family background</h2>
+    <div class="body measure">
+      <p>On its own, a one standard deviation higher family status is associated with <b data-k="m1">–</b> more points. Once the average status of the student's schoolmates is added to the model, the student's own background accounts for just <b data-k="own">–</b> points. A one standard deviation more advantaged school intake, in contrast, is associated with <b data-k="comp">–</b> points.</p>
+      <p>Two students from equally well-off families therefore tend to score quite differently if one attends a school with a more advantaged intake. The explained variance roughly doubles, from <b data-k="r2m1">–</b> to <b data-k="r2m2">–</b>. All differences between schools together account for <b data-k="r2m3">–</b>.</p>
+    </div>
+
+    <div class="two-col">
+      <figure class="fig">
+        <div class="fig-head">
+          <p class="fig-label">Figure 2</p>
+          <p class="fig-title">At equal family status, the school's intake is associated with a larger difference</p>
+          <p class="fig-sub">Change in <span data-k="subjLower">mathematics</span> score, with 95% confidence interval</p>
+        </div>
+        <div class="fig-controls">
+          <span>Scale</span>
+          <div class="seg" id="coef-scale">
+            <button type="button" data-v="sd" aria-pressed="true">Per 1 SD</button>
+            <button type="button" data-v="unit" aria-pressed="false">Per ESCS unit</button>
+          </div>
+        </div>
+        <div class="chart" id="fig2"></div>
+        <figcaption><b>Model 1:</b> score on student ESCS. <b>Model 2:</b> score on student ESCS and school mean ESCS. SD = standard deviation of student ESCS (<span data-k="sdEscs">–</span>) or of school mean ESCS across students (<span data-k="sdSchool">–</span>). One SD of school composition is a smaller step on the ESCS scale; switch to "per ESCS unit" to compare on the same scale.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <div class="fig-head">
+          <p class="fig-label">Figure 3</p>
+          <p class="fig-title">School composition doubles the explained variance</p>
+          <p class="fig-sub">Share of variance in <span data-k="subjLower">mathematics</span> scores explained (R²)</p>
+        </div>
+        <div class="fig-controls" aria-hidden="true">&nbsp;</div>
+        <div class="chart" id="fig3"></div>
+        <figcaption>Model 3 uses a separate intercept for every school, so it captures <i>all</i> differences between schools: intake, resources, teaching, selection and location. Model 4 adds student ESCS.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="chapter" id="location">
+    <p class="chapter-num">3 · Village and city</p>
+    <h2>The village–city gap is largely a gap in school composition</h2>
+    <div class="body measure">
+      <p>Students in large-city schools score <b data-k="gapRaw">–</b> points higher than students in village schools, equivalent to roughly <span data-k="gapYears">–</span> years of schooling. Taking students' own family status into account reduces the gap to <b data-k="gapEscs">–</b> points. Once the social composition of the school is added, it falls to <b data-k="gapComp">–</b> points<span data-k="gapSig"></span>.</p>
+      <p>The territorial gap is therefore not mainly geographic. It reflects where advantaged families are concentrated. Step through the models below to watch the gaps shrink.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-head">
+        <p class="fig-label">Figure 4</p>
+        <p class="fig-title" id="fig4-title">–</p>
+        <p class="fig-sub">Difference in <span data-k="subjLower">mathematics</span> score compared with village schools (&lt; 3,000 inhabitants), with 95% confidence interval</p>
+      </div>
+      <div class="fig-controls">
+        <div class="stepper" id="loc-model" role="group" aria-label="Model">
+          <button type="button" data-v="raw" aria-pressed="true"><span class="k">1</span>No controls</button>
+          <button type="button" data-v="escs" aria-pressed="false"><span class="k">2</span>+ Student ESCS</button>
+          <button type="button" data-v="comp" aria-pressed="false"><span class="k">3</span>+ School mean ESCS</button>
+        </div>
+      </div>
+      <div class="chart" id="fig4"></div>
+      <figcaption>Weighted regression of score on school location dummies (reference: village), adding student ESCS (model 2) and school mean ESCS (model 3). School location is reported by the principal (SC001). Hollow markers: difference not statistically significant at 5%. Grey rings: the unadjusted gap (model 1), for comparison. <span data-k="locN"></span></figcaption>
+    </figure>
+  </section>
+
+  <!-- 4 -->
+  <section class="chapter" id="prediction">
+    <p class="chapter-num">4 · Same family, different school</p>
+    <h2>For otherwise similar students, the school's intake is associated with a larger difference than family background</h2>
+    <div class="body measure">
+      <p>Model 2 lets us compare predicted scores for otherwise similar students. A student from a typical family (median ESCS) is predicted to score <b data-k="predLow">–</b> in a school at the 10th percentile of social composition and <b data-k="predHigh">–</b> in a school at the 90th percentile, a difference of <b data-k="predSchoolDiff">–</b> points. Within the same school, the difference between a disadvantaged and an advantaged student (10th vs 90th percentile of ESCS) is <b data-k="predFamDiff">–</b> points.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-head">
+        <p class="fig-label">Figure 5</p>
+        <p class="fig-title">Predicted score by school composition, for students from different family backgrounds</p>
+        <p class="fig-sub">Predicted <span data-k="subjLower">mathematics</span> score from Model 2. Hover to read values.</p>
+      </div>
+      <div class="chart" id="fig5"></div>
+      <ul class="legend" id="fig5-legend"></ul>
+      <figcaption>Lines span the 5th to 95th percentile of school mean ESCS. Family background is set to the 10th, 50th and 90th percentile of student ESCS in Ukraine. These are model-based associations, not causal effects of changing schools.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 5 -->
+  <section class="chapter" id="explore">
+    <p class="chapter-num">5 · Explore</p>
+    <h2>Every school in the sample</h2>
+    <div class="body measure">
+      <p>Each circle is one school, placed by the average family status of its students and their average score. Hover over a school for details; click it to show its individual students. Use the legend to filter by settlement size.</p>
+    </div>
+    <figure class="fig">
+      <div class="fig-head">
+        <p class="fig-label">Figure 6</p>
+        <p class="fig-title">Schools with more advantaged students score higher</p>
+        <p class="fig-sub">School mean ESCS and mean <span data-k="subjLower">mathematics</span> score; circle size shows the number of students tested</p>
+      </div>
+      <ul class="legend" id="fig6-legend"></ul>
+      <div class="chart" id="fig6"></div>
+      <figcaption>School averages use the mean of the 10 plausible values and the final student weights; they are illustrative. Grey line: weighted regression of school mean score on school mean ESCS. Schools are anonymised.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 6 -->
+  <section class="chapter" id="estimates">
+    <p class="chapter-num">6 · Estimates</p>
+    <h2>Model estimates</h2>
+    <div class="table-wrap"><table id="table"></table></div>
+    <p class="fig-sub" style="font-size:13px;color:var(--muted)">Standard errors in brackets (80 BRR replicate weights, 10 plausible values). Coefficients in score points; shares in % of variance.</p>
+  </section>
+
+  <!-- methods -->
+  <section class="chapter methods" id="methods">
+    <p class="chapter-num">Methods</p>
+    <h2>Data and methods</h2>
+
+    <h3>Data</h3>
+    <p>OECD PISA 2025 public-use student and school files. Ukraine participated with a sample covering 17 of its 27 regions (country code <code>QUA</code>); schools in occupied and unsafe territories were not sampled. The student file was merged with the school file by school ID. <span data-k="sampleText"></span></p>
+
+    <h3>Measures</h3>
+    <ul>
+      <li><b>Achievement:</b> PISA scores in mathematics, reading and science (10 plausible values each).</li>
+      <li><b>Family status:</b> ESCS, the PISA index of economic, social and cultural status. It combines parents' education and occupation with home possessions. 0 is the OECD average.</li>
+      <li><b>School composition:</b> the weighted mean ESCS of the sampled students in each school.</li>
+      <li><b>School location:</b> settlement size reported by the principal (SC001), from village (&lt; 3,000) to large city (&gt; 1 million).</li>
+    </ul>
+
+    <h3>Models</h3>
+    <p>Weighted linear regressions: <b>M1</b> score ~ ESCS; <b>M2</b> score ~ ESCS + school mean ESCS; <b>M3</b> score ~ school fixed effects; <b>M4</b> score ~ ESCS + school fixed effects. Location models regress score on settlement-size dummies, adding ESCS and school mean ESCS. Standardised coefficients multiply the unit coefficient by the weighted SD of student ESCS or of school mean ESCS across students.</p>
+
+    <h3>Estimation</h3>
+    <p>All estimates follow the <i>PISA Data Analysis Manual</i>. Each model is estimated with the final student weight for each of the 10 plausible values. Sampling variance is computed from the 80 Fay BRR replicate weights (k = 0.5), and the results are combined with Rubin's rules. School mean ESCS is recomputed under each replicate weight. Differences are treated as statistically significant when |estimate| &gt; 1.96 × SE.</p>
+
+    <h3>Limitations</h3>
+    <ul>
+      <li>The estimates are associations, not causal effects. School composition is partly the result of families choosing schools and schools selecting students, so it also captures unmeasured differences between families.</li>
+      <li>School mean ESCS is estimated from the sampled students, about 25 per school, and includes the student themselves. Measurement error in this mean usually biases its coefficient towards zero.</li>
+      <li>The sample covers 17 of 27 regions and is not representative of all of Ukraine. The public file contains no breakdown by oblast.</li>
+      <li>PISA measures the literacy of 15-year-olds, not NMT results.</li>
+    </ul>
+
+    <h3>References</h3>
+    <ul class="refs">
+      <li>Coleman, J. S., et al. (1966). <i>Equality of Educational Opportunity.</i> Washington, DC: U.S. Government Printing Office.</li>
+      <li>OECD (2009). <i>PISA Data Analysis Manual: SPSS, Second Edition.</i> Paris: OECD Publishing.</li>
+      <li>OECD (2026). <i>PISA 2025 Database.</i> Paris: OECD Publishing.</li>
+      <li>Willms, J. D. (2010). School composition and contextual effects on student outcomes. <i>Teachers College Record, 112</i>(4), 1008–1037.</li>
+    </ul>
+
+    <h3>Reproducibility</h3>
+    <p>The download and analysis scripts, the Ukrainian subset of the data and instructions for reproducing every number on this page are in the <a href="https://github.com/yuliiamartynova/pisa-ukraine-wealth-vs-school">GitHub repository</a>.</p>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div class="wrap">Source: OECD (2026), PISA 2025 Database. Analysis and visualisation by the repository author.</div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
